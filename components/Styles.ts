@@ -20,5 +20,9 @@ export const styles = StyleSheet.create({
         marginVertical: 6,
         paddingVertical: 12,
         borderRadius: 8
+    },
+    link: {
+        textDecorationLine: 'underline',
+        color: '#0000ff'
     }
 })
