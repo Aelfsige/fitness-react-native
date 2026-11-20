@@ -2,7 +2,7 @@ import { View, Text, TextInput, Pressable } from 'react-native'
 import { useState } from 'react'
 import { Link, useRouter } from 'expo-router'
 import { styles } from '../components/Styles'
-import { supabase } from '../supabase/supabase'
+import { supabase } from '../database/supabase'
 
 const login = () => {
     const [email, setEmail] = useState('')
