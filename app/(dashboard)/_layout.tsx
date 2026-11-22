@@ -37,6 +37,18 @@ const _layout = () => {
             }}     
         />
         <Tabs.Screen 
+            name='create' 
+            options={{
+                title: 'Create',
+                tabBarIcon: ({ focused }) => (
+                    <Ionicons
+                        size={24}
+                        name={focused ? 'create' : 'create-outline'}
+                    />
+                )
+            }}   
+        />
+        <Tabs.Screen 
             name='profile' 
             options={{
                 title: 'Profile',
