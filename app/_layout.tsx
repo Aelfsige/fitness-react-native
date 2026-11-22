@@ -33,9 +33,10 @@ const _layout = () => {
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Protected guard={authenticated} redirectTo='/login'>
-          <Stack.Screen name='(dashboard)' />
-        </Stack.Protected>
+      <Stack.Protected guard={authenticated} redirectTo='/login'>
+        <Stack.Screen name='(dashboard)' />
+        <Stack.Screen name='(plan)' />
+      </Stack.Protected>
     </Stack>
   )
 }
