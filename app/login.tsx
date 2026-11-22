@@ -1,5 +1,5 @@
 import { View, Text, TextInput, Pressable } from 'react-native'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useRouter } from 'expo-router'
 import { styles } from '../components/Styles'
 import { supabase } from '../database/supabase'
@@ -13,8 +13,8 @@ const login = () => {
     const handleSubmit = async () => {
         setMessage('')
         const {data, error} = await supabase.auth.signInWithPassword({
-            email: email.trim(),
-            password: password
+            email: 'johndoe@gmail.com', // email.trim(),
+            password: '12345678' // password
         })
 
         if (error) {
@@ -31,6 +31,11 @@ const login = () => {
         }
     }
 
+    // for testing only
+    useEffect(() => {
+        handleSubmit()
+    }, [])
+
     return (
         <View style={styles.center}>
             <Text style={styles.title}>Login</Text>
@@ -40,6 +45,7 @@ const login = () => {
                     onChangeText={setEmail}
                     value={email}
                     placeholder='johndoe@email.com'
+                    placeholderTextColor={'#aaa'}
                     style={{ borderWidth: 1 }}
                     keyboardType='email-address'
                     autoCapitalize='none'
