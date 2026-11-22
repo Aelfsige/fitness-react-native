@@ -24,5 +24,10 @@ export const styles = StyleSheet.create({
     link: {
         textDecorationLine: 'underline',
         color: '#0000ff'
+    },
+    card: {
+        padding: 8,
+        margin: 8,
+        backgroundColor: '#ddd'
     }
 })
