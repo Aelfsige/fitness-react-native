@@ -3,13 +3,8 @@ import { useEffect, useState } from 'react'
 import { router } from 'expo-router'
 import { supabase } from '../../database/supabase'
 import { styles } from '../../components/Styles'
-
-interface User {
-  username: string,
-  height_cm: number,
-  weight_kg: number,
-  created_at: Date
-}
+import { getAuthUser, getUser } from '../../utils/functions'
+import { User } from '../../utils/constants'
 
 const profile = () => {
   const [email, setEmail] = useState('')
@@ -17,13 +12,20 @@ const profile = () => {
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    const getUsername = async (id: string) => {
-      const { data, error } = await supabase
-        .from('users')
-        .select('username, height_cm, weight_kg, created_at')
-        .eq('id', id)
-        .single()
-      
+    const init = async () => {
+      // get user authenticated email and auth id
+      const { userEmail, userId } = await getAuthUser()
+
+      if (!userEmail || !userId) {
+        setMessage('Failed to retrieve user information')
+        return
+      }
+
+      setEmail(userEmail)
+
+      // get user profile
+      const { data, error } = await getUser(userId)
+
       if (error) {
         setMessage(error.message)
         return
@@ -32,19 +34,7 @@ const profile = () => {
       setUser(data)
     }
 
-    const getUser = async () => {
-      const { data, error } = await supabase.auth.getUser()
-
-      if (error) {
-        setMessage(error.message)
-        return
-      }
-
-      setEmail(data.user.email!)
-      getUsername(data.user.id)
-    }
-
-    getUser()
+    init()
   }, [])
 
   const handleSignOut = async () => {
