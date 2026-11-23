@@ -1,5 +1,9 @@
 import { supabase } from "../database/supabase";
-import { Plan, PlanExercise, PlanExerciseRow } from "./constants";
+import { 
+    Plan, PlanExercise,
+    PlanRow, PlanExerciseRow, 
+    SavedPlan, SavedPlanRow 
+} from "./constants";
 
 // Authentication
 export const signIn = async (email: string, password: string) => {
@@ -16,9 +20,43 @@ export const signUp = async (email: string, password: string) => {
     })
 }
 
+// Home
+export const getSavedPlan = async (): Promise<SavedPlan[]> => {
+    const { userId } = await getAuthUser()
+    
+    const { data, error } = await supabase
+        .from('saved_plans')
+        .select(`
+            users!inner ( username ),
+            plans!inner ( 
+                title, 
+                difficulty, 
+                duration_weeks, 
+                created_at, 
+                category
+            )
+        `)
+        .eq('user_id', userId)
+        .overrideTypes<SavedPlanRow[], { merge: false }>()
+
+    if (error) throw error
+
+    console.log(data)
+
+    return data.map(row => ({
+        planId: row.plans.id,
+        creator: row.users.username,
+        title: row.plans.title,
+        difficulty: row.plans.difficulty,
+        duration_weeks: row.plans.duration_weeks,
+        created_at: row.plans.created_at,
+        category: row.plans.category
+    }))
+}
+
 // Plans
-export const getPlans = async () => {
-    return await supabase
+export const getPlans = async (): Promise<Plan[]> => {
+    const { data, error } = await supabase
     .from('plans')
     .select(`
         id, 
@@ -30,7 +68,19 @@ export const getPlans = async () => {
         users!inner( username )
     `)
     .eq('is_public', true)
-    .overrideTypes<Plan[], { merge: false }>()
+    .overrideTypes<PlanRow[], { merge: false }>()
+
+    if (error) throw error
+
+    return data.map(row => ({
+        id: row.id,
+        title: row.title,
+        difficulty: row.difficulty,
+        duration_weeks: row.duration_weeks,
+        created_at: row.created_at,
+        category: row.category,
+        creator: row.users.username
+    }))
 }
 
 export const getPlanExercises = async (planId?: number): Promise<PlanExercise[]> => {
@@ -55,8 +105,7 @@ export const getPlanExercises = async (planId?: number): Promise<PlanExercise[]>
     if (error) throw error
 
     return data.map(row => ({
-        title: row.plans.title,
-        name: row.exercises.name,
+        exercise_name: row.exercises.name,
         primary_muscle_group: row.exercises.primary_muscle_group,
         sets: row.sets,
         reps: row.reps,
@@ -64,9 +113,14 @@ export const getPlanExercises = async (planId?: number): Promise<PlanExercise[]>
     }))
 }
 
+// Create
+// Coming soon...
+
 // User
 export const getAuthUser = async () => {
     const { data, error } = await supabase.auth.getUser()
+
+    if (error) throw error
 
     return { userEmail: data.user?.email, userId: data.user?.id }
 }
