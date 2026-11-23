@@ -1,9 +1,8 @@
 import { View, Text } from 'react-native'
-import { Stack } from 'expo-router'
 import { useEffect, useState } from "react";
 import { supabase } from "../../database/supabase";
 import { useLocalSearchParams } from 'expo-router';
-import { PlanExercise, PlanExerciseRow } from '../../utils/constants';
+import { PlanExercise } from '../../utils/constants';
 import { getPlanExercises } from '../../utils/functions';
 import { styles } from '../../components/Styles';
 
@@ -18,7 +17,7 @@ const plan = () => {
       const data: PlanExercise[] = await getPlanExercises(Number.parseInt(id))
 
       if (!data) {
-        setMessage(data)
+        setMessage('Failed to retrieve data')
         return
       }
 
@@ -45,7 +44,7 @@ const plan = () => {
         planExercises.map(pe => {
         return (
           <>
-            <Text>{pe.name}</Text>
+            <Text>{pe.exercise_name}</Text>
             <Text>{pe.primary_muscle_group}</Text>
             <Text>{pe.sets}</Text>
             <Text>{pe.reps}</Text>
@@ -53,6 +52,7 @@ const plan = () => {
           </>
         )
       })}
+      {message && <Text>{message}</Text>}
     </View>
   )
 }
