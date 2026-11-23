@@ -73,7 +73,7 @@ export const getAuthUser = async () => {
 
 export const getUser = async (userId: string) => {
     // !IMPORTANT!
-    // Use getUser() first to retrieve the id of the current logged user
+    // Use getAuthUser() first to retrieve the id of the current logged user
 
     return await supabase
         .from('users')
