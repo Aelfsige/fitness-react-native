@@ -163,7 +163,7 @@ CREATE TABLE public.workout_logs (
 
 `Chest` | `Back` | `Shoulders` | `Biceps` | `Triceps` | `Quads` | `Hamstrings` | `Glutes` | `Calves` | `Abs` | `Full Body`
 
-## RLS Policies
+## Row Level Security (RLS) Policies
 
 ### `equipments`
 
