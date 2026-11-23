@@ -1,25 +1,28 @@
 import { View, Text, TextInput, Pressable } from 'react-native'
 import { useEffect, useState } from 'react'
-import { Link, useRouter } from 'expo-router'
+import { Link, router } from 'expo-router'
 import { styles } from '../components/Styles'
 import { supabase } from '../database/supabase'
+import { signIn } from '../utils/functions'
 
 const login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [message, setMessage] = useState('')
-    const router = useRouter()
 
     const handleSubmit = async () => {
         setMessage('')
-        const {data, error} = await supabase.auth.signInWithPassword({
-            email: 'johndoe@gmail.com', // email.trim(),
-            password: '12345678' // password
-        })
+
+        // Uncomment for the final results
+        // if (!email || !password) {
+        //     setMessage('Please fill up the missing fields.')
+        //     return
+        // }
+
+        const { data, error } = await signIn('johndoe@gmail.com', '12345678') // for testing
 
         if (error) {
             setMessage(error.message)
-            console.log(error.code, error.status)
             setEmail('')
             setPassword('')
             return
@@ -31,10 +34,11 @@ const login = () => {
         }
     }
 
-    // for testing only
+    // for testing
     useEffect(() => {
         handleSubmit()
     }, [])
+    // ---
 
     return (
         <View style={styles.center}>

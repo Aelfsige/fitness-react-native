@@ -1,8 +1,9 @@
 import { View, Text, TextInput, Pressable } from 'react-native'
 import { useState } from 'react'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import { styles } from '../components/Styles'
 import { supabase } from '../database/supabase'
+import { signUp } from '../utils/functions'
 
 const register = () => {
     const [email, setEmail] = useState('')
@@ -11,23 +12,25 @@ const register = () => {
 
     const handleSubmit = async () => {
         setMessage('')
-        const {data, error} = await supabase.auth.signUp({
-            email: email.trim(),
-            password: password
-        })
+        
+        if (!email || !password) {
+            setMessage('Please fill up the missing fields.')
+            return
+        }
+
+        const { data, error } = await signUp(email, password)
 
         if (error) {
             setMessage(error.message)
-            console.log(error.code, error.status)
+            setEmail('')
+            setPassword('')
             return
         }
 
         if (data) {
-            setMessage('User account created')
+            setMessage('User account confirmed')
+            router.push('/home')
         }
-
-        setEmail('')
-        setPassword('')
     }
 
     return (
