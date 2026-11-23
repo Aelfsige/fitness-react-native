@@ -13,7 +13,17 @@ export type Category = (typeof CATEGORY)[number]
 
 // Interface
 export interface Plan {
-  id: number,
+  id: string,
+  title: string,
+  difficulty: Difficulty,
+  duration_weeks: number,
+  created_at: string,
+  category: Category,
+  creator: string
+}
+
+export interface PlanRow {
+  id: string,
   title: string,
   difficulty: Difficulty,
   duration_weeks: number,
@@ -28,13 +38,11 @@ export interface PlanExerciseRow {
   day_of_week: number
   sets: number
   reps: number
-  plans: { title: string }
   exercises: { name: string; primary_muscle_group: string }
 }
 
 export interface PlanExercise {
-  title: string
-  name: string
+  exercise_name: string
   primary_muscle_group: string
   sets: number
   reps: number
@@ -48,3 +56,24 @@ export interface User {
   created_at: Date
 }
 
+export interface SavedPlanRow {
+  users: { username: string }
+  plans: {
+    id: string
+    title: string,
+    difficulty: Difficulty,
+    duration_weeks: number,
+    created_at: string,
+    category: Category,
+  }
+}
+
+export interface SavedPlan {
+  planId: string,
+  creator: string,
+  title: string,
+  difficulty: Difficulty,
+  duration_weeks: number,
+  created_at: string,
+  category: Category,
+}
