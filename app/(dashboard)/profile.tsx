@@ -47,7 +47,7 @@ const profile = () => {
     <View style={styles.center}>
       <Text style={styles.title}>{user?.username}</Text>
       <Text>{email}</Text>
-      <Pressable style={styles.btn} onPress={handleSignOut}>
+      <Pressable style={styles.primaryButton} onPress={handleSignOut}>
         <Text style={{ textAlign: 'center' }}>Sign out</Text>
       </Pressable>
       {message && <Text>{message}</Text>}

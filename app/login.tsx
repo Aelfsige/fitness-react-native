@@ -42,36 +42,36 @@ const login = () => {
 
     return (
         <View style={styles.center}>
-            <Text style={styles.title}>Login</Text>
+            <Text style={styles.display}>Login</Text>
             <View style={{ width: '100%', paddingBottom: 12 }}>
-                <Text>Email</Text>
+                <Text style={styles.subtitle}>Email</Text>
                 <TextInput
                     onChangeText={setEmail}
                     value={email}
                     placeholder='johndoe@email.com'
                     placeholderTextColor={'#aaa'}
-                    style={{ borderWidth: 1 }}
+                    style={styles.input}
                     keyboardType='email-address'
                     autoCapitalize='none'
                 />
             </View>
             <View style={{ width: '100%' }}>
-                <Text>Password</Text>
+                <Text style={styles.subtitle}>Password</Text>
                 <TextInput
                     onChangeText={setPassword}
                     value={password}
-                    style={{ borderWidth: 1 }}
+                    style={styles.input}
                     secureTextEntry={true}
                 />
             </View>
-            <Pressable style={styles.btn} onPress={handleSubmit}>
+            <Pressable style={styles.primaryButton} onPress={handleSubmit}>
                 <Text style={{ textAlign: 'center', color: '#fff' }}>Submit</Text>
             </Pressable>
             <View  style={{ width: '100%', flexDirection: 'row' }}>
-                <Text>No account yet? </Text>
+                <Text style={styles.subtitle}>No account yet? </Text>
                 <Link href="/register" style={styles.link}>Register now</Link>
             </View>
-            {message && <Text>{message}</Text>}
+            {!!message && <Text>{message}</Text>}
         </View>
     )
 }

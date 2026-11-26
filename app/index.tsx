@@ -7,8 +7,8 @@ export default function index() {
     return(
         <View style={styles.center}>
             <Text style={styles.title}>Fitness App</Text>
-            <Link href='/login' style={styles.btn}>Login</Link>
-            <Link href='/register' style={styles.btn}>Register</Link>
+            <Link href='/login' style={styles.primaryButton}>Login</Link>
+            <Link href='/register' style={styles.primaryButton}>Register</Link>
         </View>
     )
 }

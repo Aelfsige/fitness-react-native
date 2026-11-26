@@ -2,7 +2,9 @@ import { supabase } from "../database/supabase";
 import { 
     Plan, PlanExercise,
     PlanRow, PlanExerciseRow, 
-    SavedPlan, SavedPlanRow 
+    SavedPlan, SavedPlanRow, 
+    Difficulty,
+    Category
 } from "./constants";
 
 // Authentication
@@ -114,7 +116,31 @@ export const getPlanExercises = async (planId?: number): Promise<PlanExercise[]>
 }
 
 // Create
-// Coming soon...
+export const createPlan = async (
+    title: string,
+    difficulty: Difficulty,
+    duration_weeks: number,
+    category: Category,
+    created_at: Date
+) => {
+    return await supabase
+        .from('plans')
+        .insert([
+            { title, difficulty, duration_weeks, category, created_at }
+        ])
+        .select('id')
+}
+
+export const createPlanExercises = async (
+    plan_id: number,
+    exercise_id: number,
+    day_of_week: number,
+    sort_order: number,
+    sets: number,
+    reps: number
+) => {
+    
+}
 
 // User
 export const getAuthUser = async () => {
@@ -131,7 +157,7 @@ export const getUser = async (userId: string) => {
 
     return await supabase
         .from('users')
-        .select('username, height_cm, weight_kg, created_at')
+        .select('username, created_at')
         .eq('id', userId)
         .single()
 }
