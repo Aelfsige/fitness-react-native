@@ -29,8 +29,8 @@ export const getSavedPlan = async (): Promise<SavedPlan[]> => {
     const { data, error } = await supabase
         .from('saved_plans')
         .select(`
-            users!inner ( username ),
-            plans!inner ( 
+            plans!inner (
+                users!creator_id ( username ),
                 title, 
                 difficulty, 
                 duration_weeks, 
@@ -47,7 +47,7 @@ export const getSavedPlan = async (): Promise<SavedPlan[]> => {
 
     return data.map(row => ({
         planId: row.plans.id,
-        creator: row.users.username,
+        creator: row.plans.users.username,
         title: row.plans.title,
         difficulty: row.plans.difficulty,
         duration_weeks: row.plans.duration_weeks,

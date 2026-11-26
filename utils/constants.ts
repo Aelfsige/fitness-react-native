@@ -57,15 +57,15 @@ export interface User {
 }
 
 export interface SavedPlanRow {
-  users: { username: string }
   plans: {
-    id: string
+    id: string,
+    users: { username: string }
     title: string,
     difficulty: Difficulty,
     duration_weeks: number,
     created_at: string,
     category: Category,
-  }
+  },
 }
 
 export interface SavedPlan {
