@@ -37,17 +37,21 @@ export interface PlanRow {
 }
 
 export interface PlanExerciseRow {
+  id: string,
   day_of_week: number
   sets: number
-  reps: number
+  reps: number,
+  rest: number
   exercises: { name: string; primary_muscle_group: string }
 }
 
 export interface PlanExercise {
+  id: string,
   exercise_name: string
   primary_muscle_group: string
   sets: number
-  reps: number
+  reps: number,
+  rest: number,
   day_of_week: number
 }
 

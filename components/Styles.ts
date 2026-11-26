@@ -28,6 +28,10 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         color: COLORS.textMuted
     },
+    container: {
+        padding: 16,
+        paddingBottom: 36,
+    },
     sectionTitle: {
         fontSize: 18,
         fontWeight: '700',
@@ -126,4 +130,32 @@ export const styles = StyleSheet.create({
     metaText: { color: COLORS.textMuted, fontSize: 13 },
     label: { color: COLORS.text, fontSize: 13, fontWeight: '600', marginBottom: 6 },
     rowBetween: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+
+    timerBanner: {
+        backgroundColor: COLORS.primary,
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    headerImage: { width: '100%', height: 170, borderRadius: 16, marginBottom: 14 },
+    exerciseName: { color: COLORS.text, fontSize: 16, fontWeight: '700', flex: 1 },
+    muscleTag: { color: COLORS.primary, fontSize: 12, fontWeight: '700' },
+    setsRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+    setPill: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 6,
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        borderRadius: 10,
+        backgroundColor: COLORS.surfaceElevated,
+        borderWidth: 1,
+        borderColor: COLORS.border,
+    },
+    setPillDone: {
+        backgroundColor: COLORS.success,
+        borderColor: COLORS.success,
+    },
 })

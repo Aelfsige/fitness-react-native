@@ -89,10 +89,11 @@ export const getPlanExercises = async (planId?: number): Promise<PlanExercise[]>
     let query = supabase
         .from('plan_exercises')
         .select(`
+            id,
             sets,
             reps,
+            rest,
             day_of_week,
-            plans!inner ( title ),
             exercises!inner ( name, primary_muscle_group )
         `)
         .order('day_of_week', { ascending: true })
@@ -107,39 +108,29 @@ export const getPlanExercises = async (planId?: number): Promise<PlanExercise[]>
     if (error) throw error
 
     return data.map(row => ({
+        id: row.id,
         exercise_name: row.exercises.name,
         primary_muscle_group: row.exercises.primary_muscle_group,
         sets: row.sets,
         reps: row.reps,
+        rest: row.rest,
         day_of_week: row.day_of_week,
     }))
 }
 
 // Create
-export const createPlan = async (
-    title: string,
-    difficulty: Difficulty,
-    duration_weeks: number,
-    category: Category,
-    created_at: Date
-) => {
+export const createPlan = async (plan: Plan) => {
     return await supabase
         .from('plans')
         .insert([
-            { title, difficulty, duration_weeks, category, created_at }
+            plan
         ])
-        .select('id')
 }
 
-export const createPlanExercises = async (
-    plan_id: number,
-    exercise_id: number,
-    day_of_week: number,
-    sort_order: number,
-    sets: number,
-    reps: number
-) => {
-    
+export const createPlanExercises = async (planExercise: PlanExercise[]) => {
+    return await supabase
+        .from('plan_exericses')
+        .insert(planExercise)
 }
 
 // User
