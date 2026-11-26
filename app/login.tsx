@@ -1,7 +1,7 @@
 import { View, Text, TextInput, Pressable } from 'react-native'
 import { useEffect, useState } from 'react'
 import { Link, router } from 'expo-router'
-import { styles } from '../components/Styles'
+import { styles, COLORS } from '../components/Styles'
 import { supabase } from '../database/supabase'
 import { signIn } from '../utils/functions'
 
@@ -41,7 +41,7 @@ const login = () => {
     // ---
 
     return (
-        <View style={styles.center}>
+        <View style={[styles.center, {backgroundColor: COLORS.bg}]}>
             <Text style={styles.display}>Login</Text>
             <View style={{ width: '100%', paddingBottom: 12 }}>
                 <Text style={styles.subtitle}>Email</Text>
