@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons'
 import { Tabs } from 'expo-router'
+import { COLORS } from '../../components/Styles'
 
 const _layout = () => {
   return (
@@ -8,7 +9,8 @@ const _layout = () => {
             headerShown: false,
             tabBarStyle: {
                 paddingTop: 10,
-                height: 80
+                height: 80,
+                backgroundColor: COLORS.surfaceElevated
             },
         }}
     >
@@ -19,7 +21,8 @@ const _layout = () => {
                 tabBarIcon: ({ focused }) => (
                     <Ionicons
                         size={24}
-                        name={focused ? 'home' : 'home-outline'}
+                        color={focused ? COLORS.primary : COLORS.textMuted}
+                        name={focused ? 'flame' : 'flame-outline'}
                     />
                 )
             }} 
@@ -31,7 +34,8 @@ const _layout = () => {
                 tabBarIcon: ({ focused }) => (
                     <Ionicons
                         size={24}
-                        name={focused ? 'list' : 'list-outline'}
+                        color={focused ? COLORS.primary : COLORS.textMuted}
+                        name={focused ? 'barbell' : 'barbell-outline'}
                     />
                 )
             }}     
@@ -43,6 +47,7 @@ const _layout = () => {
                 tabBarIcon: ({ focused }) => (
                     <Ionicons
                         size={24}
+                        color={focused ? COLORS.primary : COLORS.textMuted}
                         name={focused ? 'create' : 'create-outline'}
                     />
                 )
@@ -55,6 +60,7 @@ const _layout = () => {
                 tabBarIcon: ({ focused }) => (
                     <Ionicons
                         size={24}
+                        color={focused ? COLORS.primary : COLORS.textMuted}
                         name={focused ? 'person' : 'person-outline'}
                     />
                 )
