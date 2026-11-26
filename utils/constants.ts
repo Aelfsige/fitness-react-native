@@ -5,11 +5,13 @@ export const MUSCLES = [
   'Quads', 'Hamstrings', 'Glutes', 'Calves', 'Abs', 'Full Body',
 ] as const
 export const CATEGORY = ['Strength', 'Hypertrophy', 'Fat Loss', 'Endurance', 'General Fitness'] as const
+export const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 // Types
 export type Difficulty = (typeof DIFFICULTY)[number]
 export type Muscle = (typeof MUSCLES)[number]
 export type Category = (typeof CATEGORY)[number]
+export type Day = (typeof DAYS)[number]
 
 // Interface
 export interface Plan {
@@ -76,4 +78,13 @@ export interface SavedPlan {
   duration_weeks: number,
   created_at: string,
   category: Category,
+}
+
+export interface Exercise {
+  id: string
+  name: string,
+  sets: string,
+  reps: string,
+  rest: string,
+  day: string
 }
