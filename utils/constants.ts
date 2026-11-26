@@ -53,8 +53,6 @@ export interface PlanExercise {
 
 export interface User {
   username: string,
-  height_cm: number,
-  weight_kg: number,
   created_at: Date
 }
 
