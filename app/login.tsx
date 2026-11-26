@@ -69,7 +69,7 @@ const login = () => {
             </Pressable>
             <View  style={{ width: '100%', flexDirection: 'row' }}>
                 <Text style={styles.subtitle}>No account yet? </Text>
-                <Link href="/register" style={styles.link}>Register now</Link>
+                <Link href="/register" style={{ color: COLORS.text, textDecorationLine: 'underline' }}>Register now</Link>
             </View>
             {!!message && <Text>{message}</Text>}
         </View>
